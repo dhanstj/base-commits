@@ -6,21 +6,17 @@ on:
 jobs:
   commit:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.MY_TOKEN }}
       - name: Make 100 commits
         run: |
           git config user.email "dhanstj1234@gmail.com"
           git config user.name "dhanstj"
-          for i in $(seq 101 200); do
+          for i in $(seq 201 300); do
             echo "commit $i - $(date)" >> log.txt
             git add .
-            GIT_AUTHOR_NAME="dhanstj" GIT_AUTHOR_EMAIL="dhanstj1234@gmail.com" \
-            GIT_COMMITTER_NAME="dhanstj" GIT_COMMITTER_EMAIL="dhanstj1234@gmail.com" \
             git commit -m "update $i"
           done
           git push
