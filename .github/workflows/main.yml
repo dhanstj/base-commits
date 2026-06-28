@@ -10,13 +10,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.MY_TOKEN }}
+          fetch-depth: 0
       - name: Make 100 commits
         run: |
           git config user.email "dhanstj1234@gmail.com"
           git config user.name "dhanstj"
+          git pull origin main
           for i in $(seq 201 300); do
             echo "commit $i - $(date)" >> log.txt
             git add .
             git commit -m "update $i"
           done
-          git push
+          git push origin main
