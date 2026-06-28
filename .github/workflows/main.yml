@@ -1,0 +1,22 @@
+name: Auto Commits
+
+on:
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make 100 commits
+        run: |
+          git config user.email "dhanstj1234@gmail.com"
+          git config user.name "dhanstj"
+          for i in $(seq 1 100); do
+            echo "commit $i - $(date)" >> log.txt
+            git add .
+            git commit -m "update $i"
+          done
+          git push
